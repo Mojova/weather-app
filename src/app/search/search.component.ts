@@ -6,7 +6,7 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {WeatherService} from "../weather.service";
 import {debounceTime, distinctUntilChanged, filter, Observable, switchMap} from "rxjs";
 import {Geocode, SavedData, Weather} from "../../types";
-import {AsyncPipe, NgIf} from "@angular/common";
+import {AsyncPipe, NgIf, NgOptimizedImage} from "@angular/common";
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 
 @Component({
@@ -16,7 +16,7 @@ import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
     MatFormFieldModule,
     MatInputModule,
     MatAutocompleteModule,
-    ReactiveFormsModule, AsyncPipe, NgIf, MatRadioGroup, MatRadioButton,],
+    ReactiveFormsModule, AsyncPipe, NgIf, MatRadioGroup, MatRadioButton, NgOptimizedImage,],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss'
 })

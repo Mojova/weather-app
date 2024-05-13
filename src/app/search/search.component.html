@@ -23,7 +23,9 @@
 <div *ngIf="weather$ | async as weather">
   <dl>
     <dt>Description</dt>
-    <dd>{{ weather.weather[0].description }}</dd>
+    <dd class="weatherDescription"><img ngSrc="https://openweathermap.org/img/w/{{weather.weather[0].icon}}.png"
+             alt="{{weather.weather[0].description}}" width="50" height="50"/>{{ weather.weather[0].description }}
+    </dd>
     <dt>Temperature</dt>
     <dd>{{ weather.main.temp }} {{ getTemperatureUnit() }}</dd>
     <dt>Feels like</dt>
