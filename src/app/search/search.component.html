@@ -1,4 +1,4 @@
-<form>
+<form class="form">
   <mat-form-field class="example-full-width">
     <mat-label>City</mat-label>
     <input type="text"
@@ -10,7 +10,7 @@
     >
     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayWith">
       @for (geocode of geocodes$ | async; track geocode) {
-        <mat-option [value]="geocode">{{ geocode.name }}, {{ geocode.country }}</mat-option>
+        <mat-option [value]="geocode">{{ displayWith(geocode) }}</mat-option>
       }
     </mat-autocomplete>
   </mat-form-field>
@@ -34,6 +34,8 @@
     <dd>{{ weather.main.temp_min }} {{ getTemperatureUnit() }}</dd>
     <dt>Max</dt>
     <dd>{{ weather.main.temp_max }} {{ getTemperatureUnit() }}</dd>
+    <dt>Humidity</dt>
+    <dd>{{ weather.main.humidity }} %</dd>
     <dt>Wind</dt>
     <dd>{{ weather.wind.speed }} {{ getWindSpeedUnit() }} {{ getWindDirection(weather.wind.deg) }}</dd>
   </dl>

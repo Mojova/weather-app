@@ -3,7 +3,7 @@ import {TestBed} from '@angular/core/testing';
 import {SearchComponent} from './search.component';
 import {userEvent} from "@testing-library/user-event";
 import {render, screen} from "@testing-library/angular";
-import {from, of} from "rxjs";
+import {of} from "rxjs";
 import {expectedGeocodes, expectedWeatherC, expectedWeatherF} from "../testdata";
 import {WeatherService} from "../weather.service";
 import {NoopAnimationsModule} from "@angular/platform-browser/animations";
@@ -41,9 +41,9 @@ describe('SearchComponent', () => {
     await render(SearchComponent);
     const input = screen.getByLabelText('City')
     await user.type(input, 'London');
-    const london = await screen.findByText('London, GB');
+    const london = await screen.findByText('London, England, GB');
     expect(london).toBeInTheDocument();
-    expect(await screen.findByText('City of London, GB')).toBeInTheDocument();
+    expect(await screen.findByText('City of London, England, GB')).toBeInTheDocument();
     await user.click(london)
     expect(await screen.findByText('Description')).toBeInTheDocument();
     expect(await screen.findByText('overcast clouds')).toBeInTheDocument();
@@ -53,6 +53,8 @@ describe('SearchComponent', () => {
     expect(await screen.findByText('12.57 °C')).toBeInTheDocument();
     expect(await screen.findByText('Max')).toBeInTheDocument();
     expect(await screen.findByText('14.43 °C')).toBeInTheDocument();
+    expect(await screen.findByText('Humidity')).toBeInTheDocument();
+    expect(await screen.findByText('81 %')).toBeInTheDocument();
     expect(await screen.findByText('Wind')).toBeInTheDocument();
     expect(await screen.findByText('3.6 m/h Southwest')).toBeInTheDocument();
     // Switch to imperial units, should refetch

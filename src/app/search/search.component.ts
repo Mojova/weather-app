@@ -74,7 +74,11 @@ export class SearchComponent implements OnInit {
 
 
   displayWith(geocode?: Geocode) {
-    return geocode ? `${geocode.name}, ${geocode.country}` : '';
+    if (geocode) {
+      const state = geocode.state ? ` ${geocode.state},` : '';
+      return `${geocode.name},${state} ${geocode.country}`;
+    }
+    return '';
   }
 
   getTemperatureUnit() {
