@@ -10,8 +10,6 @@ export interface Geocode {
 }
 
 export interface Weather {
-  lat: number
-  lon: number
   main: {
     temp: number
     feels_like: number
@@ -22,9 +20,10 @@ export interface Weather {
   }
   wind: {
     speed: number
-    direction: number
+    deg: number
   }
   weather: WeatherDescription[]
+  id: number
 }
 
 interface WeatherDescription {

@@ -1,4 +1,4 @@
-<form >
+<form>
   <mat-form-field class="example-full-width">
     <mat-label>City</mat-label>
     <input type="text"
@@ -25,14 +25,14 @@
     <dt>Description</dt>
     <dd>{{ weather.weather[0].description }}</dd>
     <dt>Temperature</dt>
-    <dd>{{ weather.main.temp }} {{getTemperatureUnit()}}</dd>
+    <dd>{{ weather.main.temp }} {{ getTemperatureUnit() }}</dd>
     <dt>Feels like</dt>
-    <dd>{{ weather.main.feels_like }} {{getTemperatureUnit()}}</dd>
+    <dd>{{ weather.main.feels_like }} {{ getTemperatureUnit() }}</dd>
     <dt>Min</dt>
-    <dd>{{ weather.main.temp_min   }} {{getTemperatureUnit()}}</dd>
+    <dd>{{ weather.main.temp_min }} {{ getTemperatureUnit() }}</dd>
     <dt>Max</dt>
-    <dd>{{ weather.main.temp_max }} {{getTemperatureUnit()}}</dd>
+    <dd>{{ weather.main.temp_max }} {{ getTemperatureUnit() }}</dd>
     <dt>Wind</dt>
-    <dd>{{ weather.wind.speed }} {{getWindSpeedUnit()}} {{getWindDirection(weather.wind.direction)}}</dd>
+    <dd>{{ weather.wind.speed }} {{ getWindSpeedUnit() }} {{ getWindDirection(weather.wind.deg) }}</dd>
   </dl>
 </div>
