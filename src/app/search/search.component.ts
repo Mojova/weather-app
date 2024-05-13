@@ -1,10 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {WeatherService} from "../weather.service";
-import {debounceTime, distinctUntilChanged, filter, map, Observable, switchMap, tap} from "rxjs";
+import {debounceTime, distinctUntilChanged, filter, Observable, switchMap} from "rxjs";
 import {Geocode, SavedData, Weather} from "../../types";
 import {AsyncPipe, NgIf} from "@angular/common";
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
@@ -27,7 +27,7 @@ export class SearchComponent implements OnInit {
   units = new FormControl('metric');
   weather$?: Observable<Weather>;
 
-  constructor(private weatherService: WeatherService, private formBuilder: FormBuilder) {
+  constructor(private weatherService: WeatherService) {
     this.geocodes$ = this.city.valueChanges.pipe(
       distinctUntilChanged(),
       debounceTime(500),
@@ -81,14 +81,14 @@ export class SearchComponent implements OnInit {
     if (this.units.value === 'imperial') {
       return '°F';
     }
-    return "°C";
+    return '°C';
   }
 
   getWindSpeedUnit() {
     if (this.units.value === 'imperial') {
       return 'mph';
     }
-    return "m/h";
+    return 'm/h';
   }
 
   getWindDirection(direction: number) {

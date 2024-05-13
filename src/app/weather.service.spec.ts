@@ -1,36 +1,11 @@
 import {TestBed} from '@angular/core/testing';
 
 import {WeatherService} from './weather.service';
-import {HttpClient} from "@angular/common/http";
-import {Geocode, Weather} from "../types";
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
-
-const expectedGeocodes: Geocode[] = [
-  {
-    "name": "London",
-    "local_names": {
-      "en": "London"
-    },
-    "lat": 51.5073219,
-    "lon": -0.1276474,
-    "country": "GB",
-    "state": "England"
-  },
-  {
-    "name": "City of London",
-    "local_names": {
-      "en": "City of London"
-    },
-    "lat": 51.5156177,
-    "lon": -0.0919983,
-    "country": "GB",
-    "state": "England"
-  }
-];
+import {expectedGeocodes, expectedWeatherC} from "./testdata";
 
 describe('WeatherService', () => {
   let service: WeatherService;
-  let httpClient: HttpClient;
   let httpTestingController: HttpTestingController;
 
   beforeEach(() => {
@@ -38,7 +13,6 @@ describe('WeatherService', () => {
       imports: [HttpClientTestingModule]
     });
     service = TestBed.inject(WeatherService);
-    httpClient = TestBed.inject(HttpClient);
     httpTestingController = TestBed.inject(HttpTestingController);
   });
 
@@ -54,36 +28,13 @@ describe('WeatherService', () => {
     httpTestingController.verify();
   });
   it('returns weather', () => {
-    const expectedWeather: Weather = {
-      "weather": [
-        {
-          "id": 804,
-          "main": "Clouds",
-          "description": "overcast clouds",
-          "icon": "04d"
-        }
-      ],
-      "main": {
-        "temp": 13.5,
-        "feels_like": 13.02,
-        "temp_min": 12.57,
-        "temp_max": 14.43,
-        "pressure": 1008,
-        "humidity": 81
-      },
-      "wind": {
-        "speed": 3.6,
-        "deg": 210
-      },
-      id:	2643743,
-    }
     service.getWeather(expectedGeocodes[0], 'metric').subscribe(weather => {
-      expect(weather.id).toEqual(expectedWeather.id);
+      expect(weather.id).toEqual(expectedWeatherC.id);
     });
     const req = httpTestingController.expectOne((request) => {
       return request.method === 'GET' && request.url.includes('weather?lat=51.5073219&lon=-0.1276474&units=metric&appid=');
     });
-    req.flush(expectedWeather);
+    req.flush(expectedWeatherC);
     httpTestingController.verify();
   });
 });
